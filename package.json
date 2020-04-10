@@ -1,0 +1,30 @@
+{
+  "name": "minrt",
+  "version": "0.0.1",
+  "description": "Minimalistic modern router",
+  "main": "lib/router.js",
+  "type": "module",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sobanieca/minrt"
+  },
+  "keywords": [
+    "minimalistic",
+    "modern",
+    "router",
+    "routing",
+    "vanillajs"
+  ],
+  "author": "Adam Sobaniec",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sobanieca/minrt/issues"
+  },
+  "homepage": "https://github.com/sobanieca/minrt#readme"
+}
