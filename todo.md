@@ -1,17 +1,22 @@
-minr
+minrt
 
 ```
 import { router } from "minrt";
-
+import { stateManager } from "minst";
 
 router.navigate("/subscriptions");
 
-
-router.on("/subscriptions/{subscriptionId}", router => {
-
+router.mapPath("/subscriptions/{subscriptionId}", router => {
+    router.params.subscriptionId;
 });
 
-router.on("/repositories", "<repositories-list><repositories-list>");
+router.mapPath("/repositories", "<repositories-list><repositories-list>");
 
-let subscriptionId = router.params["subscriptionId"]; // {number}
+router.initialize({
+    root: document.querySelector("#root"),
+    getState: () => stateManager.getStates(),
+    setState: (state) => stateManager.replace(state),
+    notFound: "<not-found></not-found>"
+});
+
 ```
