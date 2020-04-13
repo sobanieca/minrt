@@ -21,4 +21,12 @@ describe("given router", function () {
       assert.equal(1, 1);
     });
   });
+
+  //mapPath tests:
+  /*
+  empty path
+  empty action
+  already existing path
+  non string/function action
+  */
 });

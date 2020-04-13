@@ -14,9 +14,11 @@ router.mapPath("/repositories", "<repositories-list><repositories-list>");
 
 router.initialize({
     root: document.querySelector("#root"),
-    getState: () => stateManager.getStates(),
-    setState: (state) => stateManager.replace(state),
-    notFound: "<not-found></not-found>"
+    handlers: {
+        getState: () => stateManager.getStates(),
+        loadState: (state) => stateManager.replace(state),
+        notFound: "<not-found></not-found>"
+    }
 });
 
 ```
