@@ -2,7 +2,6 @@ import assert from "assert";
 let sinon;
 
 describe("given router", function () {
-
   let router;
 
   let importCounter = 0;
@@ -17,12 +16,12 @@ describe("given router", function () {
   describe("when calling register with empty path", function () {
     it("should throw an error", function () {
       assert.throws(() => {
-        router.register("", () => {})
+        router.register("", () => {});
       }, /Invalid parameter: path.*/g);
     });
   });
 
-  describe("when calling register with empty action", function() {
+  describe("when calling register with empty action", function () {
     it("should throw an error", function () {
       assert.throws(() => {
         router.register("/some-path", "");
@@ -30,22 +29,24 @@ describe("given router", function () {
     });
   });
 
-  describe("when calling register for already registered path", function() {
-    it("should throw an error", function() {
+  describe("when calling register for already registered path", function () {
+    it("should throw an error", function () {
       router.register("/some-path", "<some-component></some-component>");
-      
+
       assert.throws(() => {
-        router.register("/some-path", "<another-component></another-component>");
+        router.register(
+          "/some-path",
+          "<another-component></another-component>"
+        );
       }, /Invalid parameter: path must be unique/g);
     });
   });
 
-  describe("when calling register with action of non 'string' or 'function' type", function() {
-    it("should throw an error", function() {
+  describe("when calling register with action of non 'string' or 'function' type", function () {
+    it("should throw an error", function () {
       assert.throws(() => {
         router.register("/some-path", 100);
-      }, /Invalid parameter: action must be function or string/g)
+      }, /Invalid parameter: action must be function or string/g);
     });
   });
-
 });
