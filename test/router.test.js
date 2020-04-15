@@ -2,6 +2,7 @@ import assert from "assert";
 let sinon;
 
 describe("given router", function () {
+
   let router;
 
   let importCounter = 0;
@@ -13,20 +14,38 @@ describe("given router", function () {
     sinon = sinonModule.default;
   });
 
-  describe("when something", function () {
-    it("should do something", function () {
-      sinon.fake();
-      router.navigate("/somewhere");
-
-      assert.equal(1, 1);
+  describe("when calling register with empty path", function () {
+    it("should throw an error", function () {
+      assert.throws(() => {
+        router.register("", () => {})
+      }, /Invalid parameter: path.*/g);
     });
   });
 
-  //mapPath tests:
-  /*
-  empty path
-  empty action
-  already existing path
-  non string/function action
-  */
+  describe("when calling register with empty action", function() {
+    it("should throw an error", function () {
+      assert.throws(() => {
+        router.register("/some-path", "");
+      }, /Invalid parameter: action.*/g);
+    });
+  });
+
+  describe("when calling register for already registered path", function() {
+    it("should throw an error", function() {
+      router.register("/some-path", "<some-component></some-component>");
+      
+      assert.throws(() => {
+        router.register("/some-path", "<another-component></another-component>");
+      }, /Invalid parameter: path must be unique/g);
+    });
+  });
+
+  describe("when calling register with action of non 'string' or 'function' type", function() {
+    it("should throw an error", function() {
+      assert.throws(() => {
+        router.register("/some-path", 100);
+      }, /Invalid parameter: action must be function or string/g)
+    });
+  });
+
 });
