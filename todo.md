@@ -1,5 +1,9 @@
 minrt
 
+TODO:
+unregister() method in router
+replace(stateName, obj) in minst
+
 ```
 import { router } from "minrt";
 import { stateManager } from "minst";
