@@ -1,12 +1,12 @@
 import assert from "assert";
 let sinon;
 
-describe("given router", function () {
+describe("given router", async function () {
   let router;
 
   let importCounter = 0;
   beforeEach(async function () {
-    let routerModule = await import(`../lib/router.js?${importCounter}`);
+    let routerModule = await import(`../lib/router.js?${importCounter++}`);
     router = routerModule.default;
 
     let sinonModule = await import("sinon");
@@ -47,6 +47,37 @@ describe("given router", function () {
       assert.throws(() => {
         router.register("/some-route", 100);
       }, /Invalid parameter: action must be function or string/g);
+    });
+  });
+
+  describe("when calling register", function () {
+    it("should register given route", function () {
+      router.register("/some-route", "<app-component></app-component>");
+      assert.deepEqual(router.registeredRoutes, ["/some-route"]);
+    });
+  });
+
+  describe("when calling unregister with null value", function () {
+    it("should throw an error", function () {
+      assert.throws(() => {
+        router.unregister(null);
+      }, /Invalid parameter: route cannot be null.*/g);
+    });
+  });
+
+  describe("when calling unregister with non string value", function () {
+    it("should throw an error", function () {
+      assert.throws(() => {
+        router.unregister(10);
+      }, /Invalid parameter: route must be string.*/g);
+    });
+  });
+
+  describe("when calling register then unregister", function () {
+    it("should remove route resulting in empty registeredRoutes array", function () {
+      router.register("/some-route", "<app-component></app-component>");
+      router.unregister("/some-route");
+      assert.deepEqual(router.registeredRoutes, []);
     });
   });
 });
