@@ -1,8 +1,11 @@
 import assert from "assert";
 let sinon;
-
 describe("given router", async function () {
   let router;
+
+  // TODO: replace with sinon?
+  global.window = {};
+  global.window.location = {};
 
   let importCounter = 0;
   beforeEach(async function () {
@@ -75,6 +78,9 @@ describe("given router", async function () {
 
   describe("when calling register then unregister", function () {
     it("should remove route resulting in empty registeredRoutes array", function () {
+      router.initialize({
+        root: {}
+      });
       router.register("/some-route", "<app-component></app-component>");
       router.unregister("/some-route");
       assert.deepEqual(router.registeredRoutes, []);
