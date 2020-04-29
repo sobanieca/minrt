@@ -79,7 +79,7 @@ describe("given router", async function () {
   describe("when calling register then unregister", function () {
     it("should remove route resulting in empty registeredRoutes array", function () {
       router.initialize({
-        root: {}
+        root: {},
       });
       router.register("/some-route", "<app-component></app-component>");
       router.unregister("/some-route");
