@@ -6,6 +6,7 @@ describe("given router", async function () {
   // TODO: replace with sinon?
   global.window = {};
   global.window.location = {};
+  global.document = {};
 
   let importCounter = 0;
   beforeEach(async function () {
@@ -55,6 +56,7 @@ describe("given router", async function () {
 
   describe("when calling register", function () {
     it("should register given route", function () {
+      router.initialize();
       router.register("/some-route", "<app-component></app-component>");
       assert.deepEqual(router.registeredRoutes, ["/some-route"]);
     });
@@ -63,6 +65,7 @@ describe("given router", async function () {
   describe("when calling unregister with null value", function () {
     it("should throw an error", function () {
       assert.throws(() => {
+        router.initialize();
         router.unregister(null);
       }, /Invalid parameter: route cannot be null.*/g);
     });
