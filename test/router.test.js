@@ -3,7 +3,6 @@ let sinon;
 describe("given router", async function () {
   let router;
 
-  // TODO: replace with sinon?
   global.window = {};
   global.window.location = {};
   global.document = {};
