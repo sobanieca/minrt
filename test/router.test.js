@@ -7,6 +7,7 @@ describe("given router", async function () {
   global.window = {};
   global.window.location = {};
   global.document = {};
+  global.document.createElement = function() {};
 
   let importCounter = 0;
   beforeEach(async function () {
