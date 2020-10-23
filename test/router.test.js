@@ -13,9 +13,6 @@ describe("given router", async function () {
   beforeEach(async function () {
     let routerModule = await import(`../lib/router.js?${importCounter++}`);
     router = routerModule.default;
-
-    let sinonModule = await import("sinon");
-    sinon = sinonModule.default;
   });
 
   describe("when calling register with empty route", function () {
@@ -81,7 +78,7 @@ describe("given router", async function () {
   });
 
   describe("when calling register then unregister", function () {
-    it("should remove route resulting in empty registeredRoutes array", function () {
+    it("should remove route resulting in empty pedRoutes array", function () {
       router.initialize({
         root: {},
       });
