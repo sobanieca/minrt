@@ -3,11 +3,15 @@ let sinon;
 describe("given router", async function () {
   let router;
 
-  // TODO: replace with sinon?
   global.window = {};
   global.window.location = {};
   global.document = {};
   global.document.createElement = function() {};
+  global.document.querySelector = function(selector) {
+	return {
+		innerHTML: "empty"
+	}
+  };
 
   let importCounter = 0;
   beforeEach(async function () {
