@@ -1,13 +1,13 @@
 import assert from "assert";
-let sinon;
+
 describe("given router", async function () {
   let router;
 
-  global.window = {};
-  global.window.location = {};
-  global.document = {};
-  global.document.createElement = function() {};
-  global.document.querySelector = function(selector) {
+  globalThis.window = {};
+  globalThis.window.location = {};
+  globalThis.document = {};
+  globalThis.document.createElement = function() {};
+  globalThis.document.querySelector = function(selector) {
 	return {
 		innerHTML: "empty"
 	}
@@ -60,7 +60,7 @@ describe("given router", async function () {
     it("should register given route", function () {
       router.initialize();
       router.register("/some-route", "<app-component></app-component>");
-      assert.deepEqual(router.registeredRoutes, ["/some-route"]);
+      assert.deepEqual(router.registeredRoutes, ["some-route"]);
     });
   });
 
@@ -91,4 +91,27 @@ describe("given router", async function () {
       assert.deepEqual(router.registeredRoutes, []);
     });
   });
+
+  describe("when calling unregister for non registered route", function() {
+  	it("should throw an error saying that non registered route provided", function() {
+  		assert.throws(() => {
+  			router.initialize({
+  				root: {}
+  			});
+  			router.register("/some-route", "<app-component></app-component>");
+  			router.unregister("non-registered-path")
+  		}, /Not registered route*/g);	
+  	});
+  });
+
+  describe("when getting registered routes", function() {
+  	it("should return valid list of routes", function() {
+  		router.initialize({
+  			root: {}	
+  		});
+  		router.register("path1", "<div></div>");
+  		router.register("/path2", "<div></div>");
+  		assert.deepEqual(router.registeredRoutes, [ "path1", "path2"]);	
+  	});
+  });  
 });

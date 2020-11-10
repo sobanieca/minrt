@@ -7,7 +7,7 @@ router = import("minrt");
 router.registeredRoutes; // [ "/details/:productId", "products/" ]
 router.initialize({
     root: document.querySelector("#root"),
-    directory: "apps",
+    pathPrefix: "apps",
     handlers: {
         getState: () => stateManager.getStates(),
         loadState: (state) => stateManager.replace(state),
