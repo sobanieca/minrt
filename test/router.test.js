@@ -1,17 +1,10 @@
 import assert from "assert";
+import { window } from "./mocks.js"
 
 describe("given router", async function () {
   let router;
 
-  globalThis.window = {};
-  globalThis.window.location = {};
-  globalThis.document = {};
-  globalThis.document.createElement = function() {};
-  globalThis.document.querySelector = function(selector) {
-	return {
-		innerHTML: "empty"
-	}
-  };
+  globalThis.window = window;
 
   let importCounter = 0;
   beforeEach(async function () {
@@ -112,6 +105,22 @@ describe("given router", async function () {
   		router.register("path1", "<div></div>");
   		router.register("/path2", "<div></div>");
   		assert.deepEqual(router.registeredRoutes, [ "path1", "path2"]);	
+  	});
+  });
+
+	// TODO: refactor
+  describe("when navigating", function() {
+  	it("should call valid function", function() {
+		let rootElement = {};
+
+  		router.initialize({
+  			root: rootElement
+  		});
+  		router.register("/products/1", "<div>Products</div>");
+
+  		router.navigate("/products/1");
+
+ 		assert.equal(rootElement.innerHTML, "<div>Products</div>");
   	});
   });  
 });
