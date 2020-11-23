@@ -30,6 +30,13 @@ router.navigate("/products/20");
   - with one parameter
   - with parameters
   - with more than 1 matching route registered
-
+  - with pathprefix should work fine
+ general:
+  - registeredRoutes should return valid list of routes
+  - loadState() should be loaded with proper state
+  - custom not found action
+  - custom not found html
+  - unregister should remove path
+  - routeParams collection should be properly set
  
 
