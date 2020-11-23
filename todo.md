@@ -21,3 +21,15 @@ router.register("/details/:productId", (params) => {
 router.routeParams["id"] // 123
 router.unregister("/products");
 router.navigate("/products/20");
+
+// tests:
+ initialization tests - DONE
+ route matching:
+  - no / trailing at the end
+  - with / trailing at the beginning
+  - with one parameter
+  - with parameters
+  - with more than 1 matching route registered
+
+ 
+

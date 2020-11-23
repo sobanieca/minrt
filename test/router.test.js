@@ -27,17 +27,20 @@ describe("given router", async function () {
     });
   });
 
-  describe("when navigating to non existing route", function() {
-  	it("should create 404 element", function(){
-  		let rootElement = {};
+  describe("when navigating to non existing route", function () {
+    it("should create 404 element", function () {
+      let rootElement = {};
 
-  		router.initialize({
-  			root: rootElement
-  		});
+      router.initialize({
+        root: rootElement,
+      });
 
-  		router.navigate("/non-existing/1");
+      router.navigate("/non-existing/1");
 
-  		assert.equal(rootElement.innerHTML, "<h2 class=\"not-found\">Not Found</h2>");
-  	});
+      assert.equal(
+        rootElement.innerHTML,
+        '<h2 class="not-found">Not Found</h2>'
+      );
+    });
   });
 });
