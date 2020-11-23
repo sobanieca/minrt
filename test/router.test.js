@@ -12,8 +12,7 @@ describe("given router", async function () {
     router = routerModule.default;
   });
 
-  // TODO: refactor
-  describe("when navigating", function () {
+  describe("when navigating to route with additional '/'", function () {
     it("should call valid function", function () {
       let rootElement = {};
 
@@ -22,9 +21,23 @@ describe("given router", async function () {
       });
       router.register("/products/1", "<div>Products</div>");
 
-      router.navigate("/products/1");
+      router.navigate("/products/1/");
 
       assert.equal(rootElement.innerHTML, "<div>Products</div>");
     });
+  });
+
+  describe("when navigating to non existing route", function() {
+  	it("should create 404 element", function(){
+  		let rootElement = {};
+
+  		router.initialize({
+  			root: rootElement
+  		});
+
+  		router.navigate("/non-existing/1");
+
+  		assert.equal(rootElement.innerHTML, "<h2 class=\"not-found\">Not Found</h2>");
+  	});
   });
 });
