@@ -12,35 +12,35 @@ describe("given router", async function () {
     router = routerModule.default;
   });
 
-  describe("when navigating to route with additional '/'", function () {
-    it("should call valid function", function () {
-      let rootElement = {};
+  let testData = [
+    ["/products", "/products", true],
+    ["products", "products/", true],
+    ["/registered", "/not-registered", false],
+  ];
 
-      router.initialize({
-        root: rootElement,
+  testData.forEach(([registeredRoute, navigationUrl, shouldMatch]) => {
+    describe(`when registered ${registeredRoute} and navigating to ${navigationUrl}`, function () {
+      it(shouldMatch ? "should match" : "shouldn't match", function () {
+        let rootElement = {};
+
+        router.initialize({
+          root: rootElement,
+        });
+
+        const matchingRouteContent = "<div>Matching route</div>";
+        router.register(registeredRoute, matchingRouteContent);
+
+        router.navigate(navigationUrl);
+
+        if (shouldMatch) {
+          assert.equal(rootElement.innerHTML, matchingRouteContent);
+        } else {
+          assert.equal(
+            rootElement.innerHTML,
+            '<h2 class="not-found">Not Found</h2>'
+          );
+        }
       });
-      router.register("/products/1", "<div>Products</div>");
-
-      router.navigate("/products/1/");
-
-      assert.equal(rootElement.innerHTML, "<div>Products</div>");
-    });
-  });
-
-  describe("when navigating to non existing route", function () {
-    it("should create 404 element", function () {
-      let rootElement = {};
-
-      router.initialize({
-        root: rootElement,
-      });
-
-      router.navigate("/non-existing/1");
-
-      assert.equal(
-        rootElement.innerHTML,
-        '<h2 class="not-found">Not Found</h2>'
-      );
     });
   });
 });

@@ -38,5 +38,3 @@ router.navigate("/products/20");
   - custom not found html
   - unregister should remove path
   - routeParams collection should be properly set
- 
-
