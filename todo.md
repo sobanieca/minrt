@@ -30,6 +30,7 @@ router.navigate("/products/20");
   - with one parameter
   - with parameters
   - with more than 1 matching route registered
+  - order of routes matter
   - with pathprefix should work fine
  general:
   - registeredRoutes should return valid list of routes

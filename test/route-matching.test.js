@@ -16,6 +16,8 @@ describe("given router", async function () {
     ["/products", "/products", true],
     ["products", "products/", true],
     ["/registered", "/not-registered", false],
+    ["/products/details/", "/products/details", true],
+	["/products/:productid", "/products/123", true]
   ];
 
   testData.forEach(([registeredRoute, navigationUrl, shouldMatch]) => {
